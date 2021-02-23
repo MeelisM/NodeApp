@@ -38,7 +38,8 @@ router.post('/register', async (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-  res.render('login');
+  const { email, message } = req.query;
+  res.render('login', { email, message });
 });
 
 router.post('/login', async (req, res) => {

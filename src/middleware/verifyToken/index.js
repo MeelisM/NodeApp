@@ -10,7 +10,7 @@ const verifyTokenAndUser = (req, res, next) => {
 
     next();
   } else {
-    res.send('/login?message=Authentication failed!');
+    res.redirect(`/login?message=${encodeURIComponent('Please login!')}`);
   }
 };
 module.exports = verifyTokenAndUser;
