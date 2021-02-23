@@ -3,6 +3,7 @@ const logger = require('morgan');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
 
 const router = require('../routes');
 
@@ -12,6 +13,7 @@ const createApp = () => {
     console.log('Connected to database!')
   );
   app.use(logger('dev'));
+  app.use(cookieParser());
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(express.static(path.join(__dirname, '..', '..', 'public')));

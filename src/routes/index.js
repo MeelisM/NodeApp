@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { response } = require('express');
 const User = require('../models/user.model');
+const verifyTokenAndUser = require('../middleware/verifyToken');
 
 router.get('/', (req, res) => {
   res.render('index');
@@ -11,10 +11,6 @@ router.get('/', (req, res) => {
 
 router.get('/register', (req, res) => {
   res.render('register');
-});
-
-router.get('/dashboard', (req, res) => {
-  res.render('dashboard');
 });
 
 router.post('/register', async (req, res) => {
@@ -30,10 +26,8 @@ router.post('/register', async (req, res) => {
     email: req.body.email,
   });
 
-  const token = jwt.sign({ id: registrationData._id }, process.env.JWT_SECRET, {
-    expiresIn: '1h',
-  });
-  res.cookie('jwt_token', token, { maxAge: 60 * 60 * 100, httpOnly: true });
+  const token = jwt.sign({ id: req.body.email }, process.env.JWT_SECRET);
+  res.cookie('jwt_token', token, { httpOnly: true });
 
   try {
     await registrationData.save();
@@ -44,13 +38,12 @@ router.post('/register', async (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-  const { email, message } = req.query;
-
-  res.render('login', { email, message });
+  res.render('login');
 });
 
 router.post('/login', async (req, res) => {
   const { email } = req.body;
+
   const user = await User.findOne({ email: req.body.email });
   if (!user) {
     res.redirect(`/login?message=${encodeURIComponent('Wrong email!')}&email=${encodeURIComponent(email)}`);
@@ -58,6 +51,8 @@ router.post('/login', async (req, res) => {
 
   try {
     if (bcryptjs.compareSync(req.body.password, user.password)) {
+      const token = jwt.sign({ email: req.body.email }, process.env.JWT_SECRET);
+      res.cookie('jwt_token', token, { httpOnly: true });
       res.redirect('/dashboard');
     } else {
       res.redirect(`/login?message=${encodeURIComponent('Wrong password!')}&email=${encodeURIComponent(email)}`);
@@ -65,6 +60,10 @@ router.post('/login', async (req, res) => {
   } catch {
     res.status(500).send;
   }
+});
+
+router.get('/dashboard', verifyTokenAndUser, (req, res) => {
+  res.render('dashboard');
 });
 
 module.exports = router;
