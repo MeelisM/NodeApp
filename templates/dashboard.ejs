@@ -1,19 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <%- include('./partials/head'); %>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="container">
-        <div class="text-center">
-            <h3>Welcome</h3>
-            
-        </div>
+      <div class="text-center p-5">
+        <h3><%= title %></h3>
+
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Image</th>
+              <th scope="col">Title</th>
+              <th scope="col">Director</th>
+              <th scope="col">Year</th>
+              <th scope="col">ID</th>
+            </tr>
+          </thead>
+          
+          <% records.forEach(function(row){%>
+            <tr>
+                <td><img src="data:image/png;base64,<%= row.image %>" /></td>
+                <td><%= row.title %></td>
+                <td><%= row.director %></td>
+                <td><%= row.year %></td>
+                <td><%= row._id %></td>
+                
+            </tr>
+            <% }) %>
+          
+        
+       
+        
+      </div>
     </div>
 
     <%- include('./partials/scripts'); %>
-</body>
-
+  </body>
 </html>

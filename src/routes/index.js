@@ -2,8 +2,10 @@ const express = require('express');
 const router = express.Router();
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const User = require('../models/user.model');
 const verifyTokenAndUser = require('../middleware/verifyToken');
+
+const { User, Movie } = require('./../models');
+const { renderLoginPage, userLogin, addMovie } = require('../controllers');
 
 router.get('/', (req, res) => {
   res.render('index');
@@ -37,34 +39,16 @@ router.post('/register', async (req, res) => {
   }
 });
 
-router.get('/login', (req, res) => {
-  const { email, message } = req.query;
-  res.render('login', { email, message });
-});
-
-router.post('/login', async (req, res) => {
-  const { email } = req.body;
-
-  const user = await User.findOne({ email: req.body.email });
-  if (!user) {
-    res.redirect(`/login?message=${encodeURIComponent('Wrong email!')}&email=${encodeURIComponent(email)}`);
-  }
-
-  try {
-    if (bcryptjs.compareSync(req.body.password, user.password)) {
-      const token = jwt.sign({ email: req.body.email }, process.env.JWT_SECRET);
-      res.cookie('jwt_token', token, { httpOnly: true });
-      res.redirect('/dashboard');
-    } else {
-      res.redirect(`/login?message=${encodeURIComponent('Wrong password!')}&email=${encodeURIComponent(email)}`);
-    }
-  } catch {
-    res.status(500).send;
-  }
-});
+router.get('/login', renderLoginPage);
+router.post('/login', userLogin);
 
 router.get('/dashboard', verifyTokenAndUser, (req, res) => {
-  res.render('dashboard');
+  Movie.find({}).exec(function (err, data) {
+    if (err) throw err;
+    res.render('dashboard', { title: 'Movies', records: data });
+  });
 });
+
+router.post('/movie', addMovie);
 
 module.exports = router;
