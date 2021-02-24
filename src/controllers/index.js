@@ -1,7 +1,15 @@
 const login = require('./login');
-const addMovie = require('./movies/addMovie');
+const movies = require('./movies/');
+const logout = require('./logout/');
+const dashboard = require('./dashboard');
+const register = require('./register');
+const index = require('./index/index');
 
 module.exports = {
   ...login,
-  ...addMovie,
+  ...movies,
+  ...logout,
+  ...dashboard,
+  ...register,
+  ...index,
 };
