@@ -19,21 +19,18 @@
               <th scope="col">ID</th>
             </tr>
           </thead>
-          
+
           <% records.forEach(function(row){%>
-            <tr>
-                <td><img src="data:image/png;base64,<%= row.image %>" /></td>
-                <td><%= row.title %></td>
-                <td><%= row.director %></td>
-                <td><%= row.year %></td>
-                <td><%= row._id %></td>
-                
-            </tr>
-            <% }) %>
-          
-        
-       
-        
+          <tr>
+            <td><img src="data:image/png;base64, <%= row.image %>" /></td>
+            <td><%= row.title %></td>
+            <td><%= row.director %></td>
+            <td><%= row.year %></td>
+            <td><%= row._id %></td>
+          </tr>
+          <% }) %>
+        </table>
+        <a href="/logout" class="btn btn-primary -5" role="button">Log out</a>
       </div>
     </div>
 

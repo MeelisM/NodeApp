@@ -49,6 +49,11 @@ router.get('/dashboard', verifyTokenAndUser, (req, res) => {
   });
 });
 
+router.get('/logout', (req, res) => {
+  res.clearCookie('jwt_token');
+  res.redirect(`/login?message=${encodeURIComponent("You've been logged out!")}`);
+});
+
 router.post('/movie', addMovie);
 
 module.exports = router;
