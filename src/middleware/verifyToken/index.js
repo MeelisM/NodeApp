@@ -5,7 +5,7 @@ const verifyTokenAndUser = (req, res, next) => {
 
   if (token) {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-    const { email } = decodedToken;
+    req.user = decodedToken;
 
     next();
   } else {
