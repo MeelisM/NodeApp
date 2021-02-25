@@ -8,9 +8,9 @@
     <% if (locals.message) { %>
     <div class="alert alert-danger text-center"><%= message %></div>
     <% } %>
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-5">
+        <div class="col-4">
           <table class="table table-hover">
             <thead class="thead-dark">
               <tr>
@@ -29,13 +29,15 @@
               <td><%= row.director %></td>
               <td><%= row.year %></td>
               <td>
-                <form action="/movies/<%= row._id %>?_method=DELETE" method="POST"><button type="submit" class="btn btn-danger">Delete</button></form>
+                <form action="/movies/<%= row._id %>?_method=DELETE" method="POST">
+                  <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
               </td>
             </tr>
             <% }) %>
           </table>
         </div>
-        <div class="col-5">
+        <div class="col-4">
           <table class="table table-hover text-center">
             <thead class="thead-dark">
               <th scope="col">Insert a new movie</th>
@@ -55,18 +57,38 @@
               <input type="movieYear" class="form-control" name="movieYear" id="movieYear" placeholder="1900" required />
             </div>
             <div class="form-group">
-              <label for="movieImage">Icon</label>
+              <label for="movieImage">Icon </label>
               <input type="movieImage" class="form-control" name="movieImage" id="movieImage" placeholder="format: base64" required />
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
-        
         </div>
-        <div class="col-2 p-5">
-          <a href="/logout" class="btn btn-danger" role="button">Log out</a>
+        <div class="col-2">
+          <div id="accordion">
+            <div class="card m-1 text-center">
+              <div class="card-header" id="headingOne">
+                <h5 class="">
+                  <button
+                    class="btn btn-link"
+                    data-toggle="collapse"
+                    data-target="#collapseOne"
+                    aria-expanded="true"
+                    aria-controls="collapseOne"
+                  >
+                    Click here for base64 string
+                  </button>
+                </h5>
+              </div>
+              <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                  iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAA7AAAAOwBeShxvQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAANYSURBVFiF7ZbfT1NnGMc/PUUjyI9YaGlWoIFpivUguBgTsoTEINNOw2ipxGwnRufFoux2FwS5WjSLd+iShShmWYwJ8w9YMr3dGRP1SkUJbTaCpJgsp6elLbB27y7aA7WhelCYN3yTN3nf53zP83zPc573fV7YwhbeMywmODuBQaA6zxYGrgAit94BXATseZy/gO+Af99VZF8uUOGQ8zjdRTgH3+RcMiFgG4DL5UJRFMrLyw379kKO0+lEURSqqqrW4ry1AAA0TUNVVZaWlopydF1HVVWSyaRZt5SYJSaTScLh8Gs5qVTqjZxCmM7AoQMu7o4FcTp2FuW0yU7ujgVpcFWaFlC4C3YB3wOOPJsTkGtsZbTJdn67/4LUYhrgDyCe4ziA/bZdpXzU4uD3B3Mkkv8ATAB6nq+XQD8QLSaoh7WreSNHT37AwhqwAnj37eObi0Oru3wDcOXSt0w+ebISw8CaNVDjcODzB9nbdoBQOEzHJ8f4uLOLyWfP8Oxv5Zi/l7lIhApbNb5AEMu27cQSCXyBIHVNu5kOhThyohtfIEjGIvHw0SPi8QVTQnsB0XH4sIgspsW5C18LQNy4PSau3fxRAOLMV+fF+NPnAhBya6uILKZFjd0hJEkS4b914ev+TADizi+/ishiWlRUVhb+gt78gNYCAV6gz93YyEnlNM1eL/VuN/6+U+zxNFNtt/P5mbO4G5uoa2jgpHIaV109e1taOHr8BHJrG81eGY/Xy6c9fqxWK165hQ/q65mbnSWm6wA/A5NGQAvQAbTn1jKgNDZ9yBdfnjOVMrO4dXOUP8MhgFvA45x53EJ2S1QVe3GTESsBHgCdbrcbj8fzv0TVNI2JiQmAaAnZlHRGo1ECgQA2m23TBaiqagiYLgF+As7qut4xMjLCwMDAClEIwdDQEFNTU+sKYLVa8fv9dHV1MTg4SCwWo7+/n/b2bKlFIhGDGpLIXhiuAiQSiVccCSHQNG3dX5jJZNB1nXQ6TTweZ3l5mYWF1XNgfn5+RYBxEjYA1NbWvuJIkiSGh4df24KLoaysDIvFwujoKJlMhtLS0pVneRmYNgQ0AaRmZhn/4fq6g60XL2ZmjGnImNxh85tQ4VgGKowMXCbbKk1fUDYA91ht51vYwvvDf12OVXW2fyiWAAAAAElFTkSuQmCC
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+        <div class="col-2 p-3 text-center"><a href="/logout" class="btn btn-danger" role="button">Log out</a></div>
       </div>
-
     </div>
 
     <%- include('./partials/scripts'); %>
