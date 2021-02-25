@@ -5,9 +5,8 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
-
 const router = require('../routes');
-
+require('dotenv').config();
 const createApp = () => {
   const app = express();
   mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }, () =>

@@ -8,7 +8,7 @@ const renderRegister = (req, res) => {
 
 const registerUser = async (req, res) => {
   const emailCheck = await User.findOne({ email: req.body.email });
-  if (emailCheck) return res.status(400).send('Email already in use!');
+  if (emailCheck) return res.redirect(`/register?message=${encodeURIComponent('Email already in use!')}`);
 
   const passwordHash = bcryptjs.hashSync(req.body.password);
 

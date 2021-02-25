@@ -27,6 +27,6 @@ router.get('/logout', userLogout);
 router.get('/dashboard', verifyTokenAndUser, renderDashboard);
 
 router.post('/movies', verifyTokenAndUser, addMovie);
-router.delete('/movies/:id', deleteMovie);
+router.delete('/movies/:id', verifyTokenAndUser, deleteMovie);
 
 module.exports = router;

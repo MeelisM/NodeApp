@@ -2,7 +2,7 @@ const Movie = require('../../models/movie.model');
 
 const addMovie = async (req, res) => {
   try {
-    await Movie.create({ title: req.body.movieTitle, director: req.body.movieDirector, year: req.body.movieYear });
+    await Movie.create({ title: req.body.movieTitle, director: req.body.movieDirector, year: req.body.movieYear, image: req.body.movieImage });
 
     res.redirect('/dashboard');
   } catch (error) {
