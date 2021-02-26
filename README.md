@@ -6,9 +6,9 @@
 
 `cp .env-example .env` (or do it manually)
 
-### Add your mongoDB connection url
+### Add your mongoDB connection
 
-`MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.g29ki.mongodb.net/<dbName>?retryWrites=true&w=majority`
+`MONGODB_URI=addYourDbHere`
 
 ### Run the application
 
