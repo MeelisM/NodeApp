@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const Movie = require('../models/movie.model');
 
 const verifyTokenAndUser = require('../middleware/verifyToken');
 
@@ -13,6 +14,8 @@ const {
   renderRegister,
   renderIndex,
   deleteMovie,
+  editMovie,
+  renderEditMovie,
 } = require('../controllers');
 
 router.get('/', renderIndex);
@@ -28,5 +31,9 @@ router.get('/dashboard', verifyTokenAndUser, renderDashboard);
 
 router.post('/movies', verifyTokenAndUser, addMovie);
 router.delete('/movies/:id', verifyTokenAndUser, deleteMovie);
+
+router.get('/movies/edit/:id', verifyTokenAndUser, renderEditMovie);
+router.put('/movies/edit/:id', editMovie);
+
 
 module.exports = router;

@@ -10,7 +10,7 @@ require('dotenv').config();
 const createApp = () => {
   const app = express();
   mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }, () =>
-    console.log('Connected to database!')
+    console.log(mongoose.connection.readyState)
   );
   app.use(logger('dev'));
   app.use(cookieParser());

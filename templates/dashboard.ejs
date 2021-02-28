@@ -31,6 +31,7 @@
               <td>
                 <form action="/movies/<%= row._id %>?_method=DELETE" method="POST">
                   <button type="submit" class="btn btn-danger">Delete</button>
+                  <a href="movies/edit/<%= row.id %>" class="btn btn-info">Edit</a>
                 </form>
               </td>
             </tr>

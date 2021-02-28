@@ -5,7 +5,7 @@ const movieSchema = new Schema({
   title: { type: String, required: true, minlength: 2, maxlength: 50 },
   year: { type: Number, minlength: 4, maxlength: 4 },
   director: { type: String, minlength: 2, maxlength: 50 },
-  image: { type: String, maxlength: 2048 },
+  image: { type: String },
   createdDate: { type: Date, default: Date.now },
 });
 

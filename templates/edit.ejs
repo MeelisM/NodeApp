@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head'); %>
+  </head>
+  
+  <body>
+    <div class="container">
+      <div class="d-flex justify-content-center">
+        <div class="col-4">
+          <table class="table table-hover text-center">
+            <thead class="thead-dark">
+              <th scope="col">Edit entry</th>
+            </thead>
+          </table>
+          
+          <form action="/movies/edit/<%= records._id %>?_method=PUT" method="POST">
+            
+            <div class="form-group">
+              <label for="movieTitle">Title</label>
+              <input type="movieTitle" class="form-control" name="movieTitle" id="movieTitle" placeholder="<%= records.title %>" required />
+            </div>
+            <div class="form-group">
+              <label for="movieDirector">Director</label>
+              <input type="movieDirector" class="form-control" name="movieDirector" id="movieDirector" placeholder="<%= records.director %>" required />
+            </div>
+            <div class="form-group">
+              <label for="movieYear">Year</label>
+              <input type="movieYear" class="form-control" name="movieYear" id="movieYear" placeholder="<%= records.year %>" required />
+            </div>
+            <div class="form-group">
+              <label for="movieImage">Icon </label>
+              <input type="movieImage" class="form-control" name="movieImage" id="movieImage" placeholder="<%= records.image %>" />
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+         
+        </div>
+      </div>
+    </div>
+    
+    <%- include('./partials/scripts'); %>
+  </body>
+</html>
