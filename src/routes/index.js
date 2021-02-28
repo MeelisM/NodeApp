@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const Movie = require('../models/movie.model');
-
 const verifyTokenAndUser = require('../middleware/verifyToken');
 
 const {
@@ -34,6 +32,5 @@ router.delete('/movies/:id', verifyTokenAndUser, deleteMovie);
 
 router.get('/movies/edit/:id', verifyTokenAndUser, renderEditMovie);
 router.put('/movies/edit/:id', editMovie);
-
 
 module.exports = router;
